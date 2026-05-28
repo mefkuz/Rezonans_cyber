@@ -34,6 +34,23 @@ try:
 except ImportError:
     install_system_tk()
 
+# --- Fix font permissions (may be root-owned from a previous sudo run) ---
+_fonts_dir = os.path.expanduser("~/.fonts")
+if os.path.isdir(_fonts_dir):
+    _real_user = os.environ.get("USER", "")
+    for f in os.listdir(_fonts_dir):
+        fp = os.path.join(_fonts_dir, f)
+        try:
+            if not os.access(fp, os.R_OK):
+                subprocess.call(["sudo", "chown", f"{_real_user}:{_real_user}", fp])
+        except Exception:
+            pass
+    try:
+        if not os.access(_fonts_dir, os.W_OK):
+            subprocess.call(["sudo", "chown", f"{_real_user}:{_real_user}", _fonts_dir])
+    except Exception:
+        pass
+
 # CustomTkinter Auto-Install
 try:
     import customtkinter as ctk
@@ -322,9 +339,6 @@ class CyberOSInstaller(ctk.CTk):
         # Phase 1
         self.log(t["s1"])
         real_user = os.environ.get("SUDO_USER", os.environ.get("USER", "root"))
-        
-        self.log("\n[!] IMPORTANT: Please look at your terminal and enter your password if prompted for sudo!\n[!] Lütfen terminale bakıp sudo şifrenizi girin!\n")
-        subprocess.call(["sudo", "-v"])
         
         if self.pkg_manager == "apt": self.run_cmd("sudo apt-get update -y")
         elif self.pkg_manager == "pacman": self.run_cmd("sudo pacman -Sy --noconfirm")
