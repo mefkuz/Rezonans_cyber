@@ -15,7 +15,8 @@ def install_system_tk():
     managers = {"apt-get": "python3-tk", "pacman": "tk", "dnf": "python3-tkinter"}
     for mgr, pkg in managers.items():
         if shutil.which(mgr):
-            cmd = f"{mgr} install -y {pkg}" if mgr != "pacman" else f"pacman -S --noconfirm {pkg}"
+            cmd = f"sudo {mgr} install -y {pkg}" if mgr != "pacman" else f"sudo pacman -S --noconfirm {pkg}"
+            print("\n[!] Lütfen terminalden sudo şifrenizi girin... (Sisteme 'tk' arayüz kütüphanesi kurulacak)")
             try:
                 subprocess.check_call(cmd.split())
                 return
