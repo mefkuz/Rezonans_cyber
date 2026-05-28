@@ -7,14 +7,7 @@ import subprocess
 import threading
 import shutil
 
-# --- Root (Sudo) Privilege Check ---
-if os.geteuid() != 0:
-    print("\n[ERROR] ACCESS DENIED! / [HATA] ERİŞİM REDDEDİLDİ!")
-    print("This tool requires ROOT (sudo) privileges to install packages.")
-    print("Bu arayüz sistem paketlerine müdahale ettiği için ROOT (sudo) yetkisi gerektirir.")
-    print("Please run it again with: / Lütfen şu komutla tekrar çalıştırın:\n")
-    print("    sudo python3 " + os.path.abspath(__file__) + "\n")
-    sys.exit(1)
+
 
 # --- Tkinter System Library Check ---
 def install_system_tk():
@@ -322,11 +315,14 @@ class CyberOSInstaller(ctk.CTk):
         
         # Phase 1
         self.log(t["s1"])
-        real_user = os.environ.get("SUDO_USER", "root")
+        real_user = os.environ.get("SUDO_USER", os.environ.get("USER", "root"))
         
-        if self.pkg_manager == "apt": self.run_cmd("apt-get update -y")
-        elif self.pkg_manager == "pacman": self.run_cmd("pacman -Sy --noconfirm")
-        elif self.pkg_manager == "dnf": self.run_cmd("dnf check-update")
+        self.log("\n[!] IMPORTANT: Please look at your terminal and enter your password if prompted for sudo!\n[!] Lütfen terminale bakıp sudo şifrenizi girin!\n")
+        subprocess.call(["sudo", "-v"])
+        
+        if self.pkg_manager == "apt": self.run_cmd("sudo apt-get update -y")
+        elif self.pkg_manager == "pacman": self.run_cmd("sudo pacman -Sy --noconfirm")
+        elif self.pkg_manager == "dnf": self.run_cmd("sudo dnf check-update")
         update_progress()
             
         # Phase 2
@@ -355,9 +351,9 @@ class CyberOSInstaller(ctk.CTk):
 
             self.log(t["s2_dl"].format(pkg))
             cmd = ""
-            if self.pkg_manager == "apt": cmd = f"apt-get install -y {pkg}"
-            elif self.pkg_manager == "pacman": cmd = f"pacman -S --noconfirm {pkg}"
-            elif self.pkg_manager == "dnf": cmd = f"dnf install -y {pkg}"
+            if self.pkg_manager == "apt": cmd = f"sudo apt-get install -y {pkg}"
+            elif self.pkg_manager == "pacman": cmd = f"sudo pacman -S --noconfirm {pkg}"
+            elif self.pkg_manager == "dnf": cmd = f"sudo dnf install -y {pkg}"
                 
             if self.run_cmd(cmd): 
                 success_count += 1
@@ -385,8 +381,8 @@ class CyberOSInstaller(ctk.CTk):
         if self.harden_var.get() == 1:
             self.log(t["s3"])
             sysctl = "net.ipv4.icmp_echo_ignore_broadcasts=1\\nnet.ipv4.tcp_syncookies=1"
-            self.run_cmd(f"echo -e '{sysctl}' > /etc/sysctl.d/99-cybersecurity.conf")
-            self.run_cmd("sysctl -p /etc/sysctl.d/99-cybersecurity.conf")
+            self.run_cmd(f"echo -e '{sysctl}' | sudo tee /etc/sysctl.d/99-cybersecurity.conf")
+            self.run_cmd("sudo sysctl -p /etc/sysctl.d/99-cybersecurity.conf")
             self.log(t["s3_ok"])
         update_progress()
 
