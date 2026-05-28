@@ -62,7 +62,7 @@ TOOLS = {
 
 PACKAGE_MAPPING = {
     "apt": {"wireshark-cli": "tshark", "bind-tools": "dnsutils", "metasploit": "metasploit-framework", "netcat": "netcat-traditional", "wordlists": "wordlists"},
-    "pacman": {"wireshark-cli": "wireshark-cli", "bind-tools": "bind", "metasploit": "metasploit", "netcat": "gnu-netcat", "wordlists": "seclists", "burpsuite": "burpsuite", "zaproxy": "zaproxy"},
+    "pacman": {"wireshark-cli": "wireshark-cli", "bind-tools": "bind", "metasploit": "metasploit", "netcat": "gnu-netcat", "wordlists": "seclists", "burpsuite": "burpsuite", "zaproxy": "zaproxy", "amass": "amass-bin", "caido": "caido-bin", "ffuf": "ffuf-bin", "gobuster": "gobuster-bin"},
     "dnf": {"wireshark-cli": "wireshark", "bind-tools": "bind-utils", "netcat": "nc"}
 }
 
