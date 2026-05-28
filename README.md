@@ -1,36 +1,32 @@
-<div align="center">
-  <h1>⚡ Rezonans CyberOS Setup</h1>
-  <p><i>The Ultimate Penetration Testing OS Converter Framework</i></p>
+# 🛡️ Rezonans CyberOS
 
-  [![Language: Python](https://img.shields.io/badge/Language-Python3-blue.svg?style=for-the-badge&logo=python)](#)
-  [![OS: Linux](https://img.shields.io/badge/OS-Linux-green.svg?style=for-the-badge&logo=linux)](#)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](#)
-  
-  <br>
-  <i>Read this document in other languages:</i><br>
-  <b><a href="README_TR.md">🇹🇷 Türkçe (Turkish)</a></b>
-</div>
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue.svg)]()
+[![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)]()
+[![Tools](https://img.shields.io/badge/Security%20Tools-120+-red.svg)]()
 
-<hr>
+> 🇹🇷 [Türkçe sürüm için tıklayın / Click for Turkish version](README_TR.md)
 
-**Rezonans CyberOS** is an advanced, automated setup framework that transforms any standard Linux distribution (Arch/CachyOS, Debian/Ubuntu, Fedora) into a fully-fledged, professional cybersecurity and penetration testing environment. 
+**Rezonans CyberOS** is a zero-dependency, terminal-based installer that transforms any Linux distribution into a professional cybersecurity workstation. It automatically detects your package manager, installs 120+ security tools, and applies kernel-level system hardening — all from a beautiful CLI interface.
 
-Instead of manually installing hacking tools one by one, Rezonans OS provides a sleek GUI to curate and build your custom arsenal in minutes.
+---
 
 ## ✨ Key Features
 
-* 🛡️ **120+ Security Tools**: Packed with industry-standard tools categorized into 9 distinct modules (Information Gathering, Web Vulnerabilities, Password Cracking, Exploitation, Forensics, Malware Analysis, and more).
-* 🎛️ **Modern GUI (CustomTkinter)**: A sleek, dark-themed, cyberpunk-style graphical interface that makes tool selection effortless.
-* 🚀 **One-Click Profiles**: 
-  * `Web Pentester`: Focuses on Web Vulns (BurpSuite, OWASP ZAP, Caido, SQLMap).
-  * `Network Admin`: Focuses on Wireshark, Aircrack-ng, Nmap, Sniffers.
-  * `Full Arsenal`: Installs all 120+ tools for a complete hacker workstation.
-* 🧠 **Smart Package Management**: Automatically detects your OS package manager (`pacman`, `apt`, `dnf`) and installs tools natively.
-* 🔒 **Kernel Hardening**: Applies strict Sysctl security policies (SYN Flood protection, Smurf Attack blocking) to secure your own workstation.
+| Feature | Description |
+|---|---|
+| 🎯 **Zero Dependencies** | No GUI libraries, no pip packages — pure Python standard library |
+| 🐧 **Universal Linux** | Auto-detects `apt`, `pacman`, `dnf` — works on Arch, Ubuntu, Fedora, CachyOS, etc. |
+| 📦 **120+ Security Tools** | 10 categories covering the full offensive & defensive security spectrum |
+| 🚀 **Smart AUR Support** | Auto-validates and batch-installs AUR packages via `paru`/`yay` on Arch-based systems |
+| 🔒 **Kernel Hardening** | Optional sysctl-based network hardening (SYN flood, ICMP, IPv6, source routing) |
+| 🌍 **English & Turkish** | Full i18n with language selection at startup |
+| 📊 **Live Progress Bar** | Real-time terminal progress tracking with per-package status |
+| ⚡ **Pre-Check Engine** | Skips already-installed packages for blazing fast re-runs |
 
-## 📥 Installation & Usage
+---
 
-Since this tool directly manipulates system packages and kernel network settings, it **must be run with root (`sudo`) privileges**.
+## 🚀 Quick Start
 
 ### 1. Clone the Repository
 ```bash
@@ -40,34 +36,100 @@ cd Rezonans_cyber
 
 ### 2. Run the Installer
 ```bash
-sudo python3 cyber_os_gui.py
+sudo python3 cyber_os_cli.py
 ```
-> **Note for Arch/CachyOS users**: The script will automatically bypass the PEP 668 (externally-managed-environment) restriction and install necessary GUI libraries (`tk`, `customtkinter`) safely in the background before launching the application.
 
-### ⚠️ Troubleshooting (Wayland / Segmentation Fault)
-If the GUI crashes immediately with a `Segmentation fault` or display error, it is likely due to Wayland blocking GUI applications from running as root. You have two easy solutions:
-
-**Option A (Recommended):** Preserve your environment variables
+Or run without sudo — it will prompt for your password when needed:
 ```bash
-sudo -E python3 cyber_os_gui.py
+python3 cyber_os_cli.py
 ```
 
-**Option B:** Grant root access to the local display server
-```bash
-xhost +si:localuser:root
-sudo python3 cyber_os_gui.py
+> **That's it!** No pip installs, no virtual environments, no configuration files. Just run and go.
+
+---
+
+## 📋 Installation Profiles
+
+| # | Profile | Categories Included |
+|---|---|---|
+| 1 | **Full Arsenal** | ALL 10 categories — complete security workstation |
+| 2 | **Web Pentester** | Info Gathering, Web Vulns, Password Cracking, Utilities |
+| 3 | **Network Specialist** | Info Gathering, Wireless, Sniffing/Spoofing, Reverse Eng., Utilities |
+| 4 | **Forensics & Malware** | Forensics, Malware Analysis, Reverse Eng., Utilities |
+| 5 | **Custom Selection** | Pick individual categories interactively |
+
+---
+
+## 🧰 Tool Categories
+
+### 🔍 Information Gathering (17 tools)
+`nmap` · `masscan` · `netdiscover` · `dnsenum` · `dnsrecon` · `fierce` · `theharvester` · `whois` · `bind-tools` · `amass` · `sublist3r` · `spiderfoot` · `dmitry` · `arp-scan` · `p0f` · `enum4linux` · `smbclient`
+
+### 🌐 Web Vulnerabilities (19 tools)
+`burpsuite` · `zaproxy` · `sqlmap` · `gobuster` · `nikto` · `dirb` · `dirbuster` · `wfuzz` · `wpscan` · `whatweb` · `caido` · `skipfish` · `uniscan` · `wapiti` · `commix` · `ffuf` · `xsser` · `xsstrike` · `w3af`
+
+### 🔑 Password Cracking (13 tools)
+`hashcat` · `john` · `hydra` · `medusa` · `ncrack` · `crunch` · `cupp` · `wordlists` · `cewl` · `crowbar` · `ophcrack` · `fcrackzip` · `pdfcrack`
+
+### 📡 Wireless Attacks (12 tools)
+`aircrack-ng` · `kismet` · `reaver` · `wifite` · `bully` · `hcxdumptool` · `hcxtools` · `cowpatty` · `fern-wifi-cracker` · `macchanger` · `mdk3` · `mdk4`
+
+### 💣 Exploitation (9 tools)
+`metasploit` · `searchsploit` · `beef` · `routersploit` · `social-engineer-toolkit` · `sqlmap` · `armitage` · `exploitdb` · `msfpc`
+
+### 🕵️ Sniffing / Spoofing (12 tools)
+`wireshark-cli` · `tcpdump` · `bettercap` · `ettercap` · `responder` · `macchanger` · `mitmproxy` · `dsniff` · `netsniff-ng` · `sslstrip` · `scapy` · `arpspoof`
+
+### ⚙️ Reverse Engineering (12 tools)
+`radare2` · `ghidra` · `apktool` · `ltrace` · `strace` · `gdb` · `binwalk` · `dex2jar` · `jd-cli` · `edb-debugger` · `jadx` · `objdump`
+
+### 🔬 Digital Forensics (11 tools)
+`autopsy` · `sleuthkit` · `volatility3` · `foremost` · `scalpel` · `exiftool` · `chkrootkit` · `rkhunter` · `ddrescue` · `guymager` · `bulk_extractor`
+
+### 🦠 Malware Analysis (4 tools)
+`yara` · `clamav` · `maldet` · `cuckoo-sandbox`
+
+### 🔧 General Utilities (14 tools)
+`tmux` · `git` · `curl` · `wget` · `htop` · `neovim` · `netcat` · `proxychains` · `tor` · `openvpn` · `docker` · `wireguard-tools` · `zsh` · `steghide`
+
+---
+
+## 🛡️ System Hardening
+
+When enabled, the installer applies kernel-level security policies:
+
+| Rule | Protection |
+|---|---|
+| `net.ipv4.icmp_echo_ignore_broadcasts=1` | Blocks Smurf attacks |
+| `net.ipv4.tcp_syncookies=1` | SYN Flood protection |
+| `net.ipv4.conf.all.accept_source_route=0` | Rejects source-routed packets |
+| `net.ipv6.conf.all.disable_ipv6=1` | Disables IPv6 (reduces attack surface) |
+
+---
+
+## 🏗️ Architecture
+
+```
+cyber_os_cli.py          ← Single-file, zero-dependency CLI installer
+├── Language Selection   ← English / Turkish
+├── Profile Selection    ← 5 pre-built profiles + custom
+├── Package Engine       ← Auto-detect apt/pacman/dnf
+│   ├── Pre-check        ← Skip installed packages
+│   ├── AUR Validation   ← Filter non-existent AUR packages
+│   └── Batch Install    ← Optimized AUR batch via paru/yay
+├── Progress Tracking    ← Real-time terminal progress bar
+└── System Hardening     ← sysctl kernel policies
 ```
 
-## 🧰 Built-In Tool Categories
-- **Information Gathering**: `nmap`, `masscan`, `recon-ng`, `spiderfoot`...
-- **Web Vulnerability**: `burpsuite`, `zaproxy`, `caido`, `sqlmap`...
-- **Password Cracking**: `hashcat`, `john`, `hydra`, `wordlists`...
-- **Wireless Attacks**: `aircrack-ng`, `kismet`, `wifite`...
-- **Exploitation Tools**: `metasploit`, `searchsploit`, `beef`...
-- **Sniffing/Spoofing**: `wireshark`, `bettercap`, `responder`...
-- **Reverse Engineering**: `ghidra`, `radare2`, `apktool`...
-- **Forensics & Malware**: `volatility3`, `autopsy`, `yara`, `clamav`...
-- **General Utilities**: `tmux`, `docker`, `tor`, `proxychains`...
+---
 
-## 🤝 Contributing
-Feel free to fork this project, submit pull requests, or request new tools to be added to the internal database!
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+<p align="center">
+  <b>Built with 💚 by the Rezonans Team</b><br>
+  <i>Transform any Linux into a cyber weapon.</i>
+</p>

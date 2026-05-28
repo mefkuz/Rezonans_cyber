@@ -1,73 +1,135 @@
-<div align="center">
-  <h1>⚡ Rezonans CyberOS Kurulum Merkezi</h1>
-  <p><i>Sıradan Bir Linux Dağıtımını Siber Güvenlik İstasyonuna Dönüştürün</i></p>
+# 🛡️ Rezonans CyberOS
 
-  [![Language: Python](https://img.shields.io/badge/Dil-Python3-blue.svg?style=for-the-badge&logo=python)](#)
-  [![OS: Linux](https://img.shields.io/badge/İS-Linux-green.svg?style=for-the-badge&logo=linux)](#)
-  [![License: MIT](https://img.shields.io/badge/Lisans-MIT-yellow.svg?style=for-the-badge)](#)
-  
-  <br>
-  <i>Bu dokümanı farklı dillerde okuyun:</i><br>
-  <b><a href="README.md">🇬🇧 English</a></b>
-</div>
+[![Lisans: MIT](https://img.shields.io/badge/Lisans-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue.svg)]()
+[![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)]()
+[![Araçlar](https://img.shields.io/badge/G%C3%BCvenlik%20Ara%C3%A7lar%C4%B1-120+-red.svg)]()
 
-<hr>
+> 🇬🇧 [Click for English version](README.md)
 
-**Rezonans CyberOS**, standart bir Linux dağıtımını (Arch/CachyOS, Debian/Ubuntu, Fedora) tek tıkla profesyonel bir siber güvenlik ve sızma testi (pentest) laboratuvarına dönüştüren gelişmiş bir otomasyon aracıdır.
+**Rezonans CyberOS**, herhangi bir Linux dağıtımını profesyonel bir siber güvenlik istasyonuna dönüştüren, sıfır bağımlılıklı terminal tabanlı kurulum aracıdır. Paket yöneticinizi otomatik algılar, 120+ güvenlik aracını kurar ve kernel düzeyinde sistem sıkılaştırması uygular — tamamı şık bir CLI arayüzünden.
 
-Güvenlik araçlarını terminalden tek tek indirmek yerine, Rezonans OS'un sunduğu modern arayüz (GUI) sayesinde kendi siber güvenlik arşivinizi saniyeler içinde inşa edebilirsiniz.
+---
 
-## ✨ Öne Çıkan Özellikler
+## ✨ Temel Özellikler
 
-* 🛡️ **120+ Siber Güvenlik Aracı**: Bilgi Toplama, Web Zafiyetleri, Parola Kırma, İstismar, Zararlı Yazılım Analizi gibi 9 farklı kategoride sektör standardı araçlar.
-* 🎛️ **Modern Arayüz (GUI)**: CustomTkinter ile hazırlanmış koyu temalı, ferah ve kullanımı kolay, sekmeli "Cyberpunk" tasarımı.
-* 🚀 **Tek Tıkla Kurulum Profilleri**: 
-  * `Web Pentester`: Sadece web odaklı çalışmak isteyenlere özel (BurpSuite, ZAP, SQLMap).
-  * `Ağ Uzmanı`: Ağ analizi ve kablosuz ağ sızma testleri için (Wireshark, Aircrack-ng).
-  * `Full Arsenal`: 120+ aracın tamamını kurarak bilgisayarınızı tam donanımlı bir istasyona çevirir.
-* 🧠 **Akıllı Paket Yönetimi**: Sisteminizin `pacman`, `apt` veya `dnf` kullandığını otomatik algılar, komutları buna göre uyarlar.
-* 🔒 **Sistem Sıkılaştırma (Hardening)**: Bilgisayarınızı ağ saldırılarına karşı korumak için Kernel düzeyinde (Sysctl) SYN Flood ve Smurf Attack korumalarını aktif eder.
+| Özellik | Açıklama |
+|---|---|
+| 🎯 **Sıfır Bağımlılık** | GUI kütüphanesi yok, pip paketi yok — saf Python standart kütüphanesi |
+| 🐧 **Evrensel Linux** | `apt`, `pacman`, `dnf` otomatik algılama — Arch, Ubuntu, Fedora, CachyOS vb. |
+| 📦 **120+ Güvenlik Aracı** | Saldırı ve savunma güvenlik yelpazesini kapsayan 10 kategori |
+| 🚀 **Akıllı AUR Desteği** | Arch tabanlı sistemlerde `paru`/`yay` ile AUR paketlerini doğrulayıp toplu kurar |
+| 🔒 **Kernel Sıkılaştırma** | sysctl tabanlı ağ güvenliği (SYN flood, ICMP, IPv6, kaynak yönlendirme) |
+| 🌍 **İngilizce & Türkçe** | Başlangıçta dil seçimi ile tam i18n desteği |
+| 📊 **Canlı İlerleme Çubuğu** | Paket bazında gerçek zamanlı terminal ilerleme takibi |
+| ⚡ **Ön Kontrol Motoru** | Kurulu paketleri atlayarak hızlı yeniden çalıştırma |
 
-## 📥 Kurulum ve Kullanım
+---
 
-Sistem paketlerine ve Kernel ayarlarına müdahale ettiği için bu aracın **root (`sudo`) yetkisiyle** çalıştırılması zorunludur.
+## 🚀 Hızlı Başlangıç
 
-### 1. Depoyu İndirin
+### 1. Depoyu Klonlayın
 ```bash
 git clone https://github.com/mefkuz/Rezonans_cyber.git
 cd Rezonans_cyber
 ```
 
-### 2. Arayüzü Başlatın
+### 2. Kurulumu Başlatın
 ```bash
-sudo python3 cyber_os_gui.py
-```
-> **Arch/CachyOS Kullanıcıları İçin Not**: Script, arayüzün açılması için gereken Python kütüphanelerini (PEP 668 engeline takılmadan) arka planda otomatik olarak sizin yerinize kuracaktır.
-
-### ⚠️ Sorun Giderme (Wayland / Segmentation Fault Hatası)
-Eğer arayüzü başlatırken anında `Segmentation fault` hatası alıp çöküyorsa, bu durum Wayland görüntü sunucusunun root (sudo) yetkisiyle grafik arayüz açılmasını engellemesinden kaynaklanır. Çözüm için şu iki yöntemden birini kullanın:
-
-**Yöntem A (Önerilen):** Ortam değişkenlerini koruyarak çalıştırın
-```bash
-sudo -E python3 cyber_os_gui.py
+sudo python3 cyber_os_cli.py
 ```
 
-**Yöntem B:** Ekran yetkilerini kök kullanıcıya da atayın
+Veya sudo olmadan çalıştırın — gerektiğinde şifrenizi soracaktır:
 ```bash
-xhost +si:localuser:root
-sudo python3 cyber_os_gui.py
+python3 cyber_os_cli.py
 ```
 
-## 🧰 İçerdiği Başlıca Araç Kategorileri
-- **Bilgi Toplama (Recon)**: `nmap`, `masscan`, `recon-ng`, `spiderfoot`...
-- **Web Zafiyet (Web Pentest)**: `burpsuite`, `zaproxy`, `caido`, `sqlmap`...
-- **Parola Kırma (Cracking)**: `hashcat`, `john`, `hydra`, `wordlists`...
-- **Kablosuz Ağ (Wireless)**: `aircrack-ng`, `kismet`, `wifite`...
-- **İstismar (Exploiting)**: `metasploit`, `searchsploit`, `beef`...
-- **Ağ Koklama (Sniffing)**: `wireshark`, `bettercap`, `responder`...
-- **Tersine Mühendislik (Reverse Eng)**: `ghidra`, `radare2`, `apktool`...
-- **Adli Bilişim & Zararlı Yazılım**: `volatility3`, `autopsy`, `yara`, `clamav`...
-- **Genel Araçlar**: `tmux`, `docker`, `tor`, `proxychains`...
+> **Hepsi bu kadar!** pip kurulumu yok, sanal ortam yok, yapılandırma dosyası yok. Sadece çalıştırın.
 
-## 🤝 Katkıda Bulunun
-Bu repoyu çatallayabilir (fork), kendi geliştirmelerinizi Pull Request olarak gönderebilir veya araç veritabanına yeni toolların eklenmesini talep edebilirsiniz!
+---
+
+## 📋 Kurulum Profilleri
+
+| # | Profil | Dahil Olan Kategoriler |
+|---|---|---|
+| 1 | **Full Arsenal (Tümü)** | 10 kategorinin tamamı — eksiksiz güvenlik istasyonu |
+| 2 | **Web Pentester** | Bilgi Toplama, Web Zafiyet, Parola Kırma, Araçlar |
+| 3 | **Ağ Uzmanı** | Bilgi Toplama, Kablosuz, Sniffing/Spoofing, Tersine Müh., Araçlar |
+| 4 | **Adli Bilişim & Zararlı Analiz** | Adli Bilişim, Zararlı Yazılım, Tersine Müh., Araçlar |
+| 5 | **Özel Seçim** | Kategorileri interaktif olarak seçin |
+
+---
+
+## 🧰 Araç Kategorileri
+
+### 🔍 Bilgi Toplama (17 araç)
+`nmap` · `masscan` · `netdiscover` · `dnsenum` · `dnsrecon` · `fierce` · `theharvester` · `whois` · `bind-tools` · `amass` · `sublist3r` · `spiderfoot` · `dmitry` · `arp-scan` · `p0f` · `enum4linux` · `smbclient`
+
+### 🌐 Web Zafiyet (19 araç)
+`burpsuite` · `zaproxy` · `sqlmap` · `gobuster` · `nikto` · `dirb` · `dirbuster` · `wfuzz` · `wpscan` · `whatweb` · `caido` · `skipfish` · `uniscan` · `wapiti` · `commix` · `ffuf` · `xsser` · `xsstrike` · `w3af`
+
+### 🔑 Parola Kırma (13 araç)
+`hashcat` · `john` · `hydra` · `medusa` · `ncrack` · `crunch` · `cupp` · `wordlists` · `cewl` · `crowbar` · `ophcrack` · `fcrackzip` · `pdfcrack`
+
+### 📡 Kablosuz Ağ Saldırıları (12 araç)
+`aircrack-ng` · `kismet` · `reaver` · `wifite` · `bully` · `hcxdumptool` · `hcxtools` · `cowpatty` · `fern-wifi-cracker` · `macchanger` · `mdk3` · `mdk4`
+
+### 💣 İstismar / Exploitation (9 araç)
+`metasploit` · `searchsploit` · `beef` · `routersploit` · `social-engineer-toolkit` · `sqlmap` · `armitage` · `exploitdb` · `msfpc`
+
+### 🕵️ Sniffing / Spoofing (12 araç)
+`wireshark-cli` · `tcpdump` · `bettercap` · `ettercap` · `responder` · `macchanger` · `mitmproxy` · `dsniff` · `netsniff-ng` · `sslstrip` · `scapy` · `arpspoof`
+
+### ⚙️ Tersine Mühendislik (12 araç)
+`radare2` · `ghidra` · `apktool` · `ltrace` · `strace` · `gdb` · `binwalk` · `dex2jar` · `jd-cli` · `edb-debugger` · `jadx` · `objdump`
+
+### 🔬 Adli Bilişim (11 araç)
+`autopsy` · `sleuthkit` · `volatility3` · `foremost` · `scalpel` · `exiftool` · `chkrootkit` · `rkhunter` · `ddrescue` · `guymager` · `bulk_extractor`
+
+### 🦠 Zararlı Yazılım Analizi (4 araç)
+`yara` · `clamav` · `maldet` · `cuckoo-sandbox`
+
+### 🔧 Genel Araçlar (14 araç)
+`tmux` · `git` · `curl` · `wget` · `htop` · `neovim` · `netcat` · `proxychains` · `tor` · `openvpn` · `docker` · `wireguard-tools` · `zsh` · `steghide`
+
+---
+
+## 🛡️ Sistem Sıkılaştırma
+
+Etkinleştirildiğinde, kernel düzeyinde güvenlik politikaları uygulanır:
+
+| Kural | Koruma |
+|---|---|
+| `net.ipv4.icmp_echo_ignore_broadcasts=1` | Smurf saldırılarını engeller |
+| `net.ipv4.tcp_syncookies=1` | SYN Flood koruması |
+| `net.ipv4.conf.all.accept_source_route=0` | Kaynak yönlendirmeli paketleri reddeder |
+| `net.ipv6.conf.all.disable_ipv6=1` | IPv6'yı devre dışı bırakır (saldırı yüzeyini daraltır) |
+
+---
+
+## 🏗️ Mimari
+
+```
+cyber_os_cli.py          ← Tek dosya, sıfır bağımlılık CLI kurulumcusu
+├── Dil Seçimi           ← İngilizce / Türkçe
+├── Profil Seçimi        ← 5 hazır profil + özel seçim
+├── Paket Motoru         ← apt/pacman/dnf otomatik algılama
+│   ├── Ön Kontrol       ← Kurulu paketleri atla
+│   ├── AUR Doğrulama    ← Var olmayan AUR paketlerini filtrele
+│   └── Toplu Kurulum    ← paru/yay ile optimize edilmiş AUR toplu kurulum
+├── İlerleme Takibi      ← Gerçek zamanlı terminal ilerleme çubuğu
+└── Sistem Sıkılaştırma  ← sysctl kernel politikaları
+```
+
+---
+
+## 📜 Lisans
+
+Bu proje **MIT Lisansı** ile lisanslanmıştır.
+
+---
+
+<p align="center">
+  <b>Rezonans Ekibi tarafından 💚 ile geliştirildi</b><br>
+  <i>Herhangi bir Linux'u siber silaha dönüştür.</i>
+</p>
