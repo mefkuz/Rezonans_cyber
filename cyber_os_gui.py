@@ -333,7 +333,7 @@ class CyberOSInstaller(ctk.CTk):
                 if subprocess.call(f"pacman -Si {pkg} > /dev/null 2>&1", shell=True) != 0:
                     # AUR'da var mı diye kontrol et (toplu kurulumun çökmesini engellemek için)
                     aur_helper = "paru" if shutil.which("paru") else ("yay" if shutil.which("yay") else None)
-                    if aur_helper and subprocess.call(f"sudo -u {real_user} {aur_helper} -Sqa {pkg} > /dev/null 2>&1", shell=True) == 0:
+                    if aur_helper and subprocess.call(f"sudo -u {real_user} {aur_helper} -Si {pkg} > /dev/null 2>&1", shell=True) == 0:
                         self.log(f"[AUR] '{pkg}' queued for AUR... / AUR listesine eklendi.")
                         aur_packages.append(pkg)
                     else:
