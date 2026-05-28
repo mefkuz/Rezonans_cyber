@@ -274,6 +274,12 @@ class CyberOSInstaller(ctk.CTk):
             self.log(f"[ERROR] {str(e)}")
             return False
 
+    def is_installed(self, pkg):
+        if self.pkg_manager == "apt": return subprocess.call(f"dpkg -s {pkg} > /dev/null 2>&1", shell=True) == 0
+        elif self.pkg_manager == "pacman": return subprocess.call(f"pacman -Q {pkg} > /dev/null 2>&1", shell=True) == 0
+        elif self.pkg_manager == "dnf": return subprocess.call(f"rpm -q {pkg} > /dev/null 2>&1", shell=True) == 0
+        return False
+
     def start_installation_thread(self):
         if not self.pkg_manager:
             self.log(T[self.lang]["err_pkg"])
@@ -316,21 +322,29 @@ class CyberOSInstaller(ctk.CTk):
         aur_packages = []
         
         for pkg in selected_packages:
+            # 1. Check if package is already installed to prevent noisy skipped warnings
+            if self.is_installed(pkg):
+                self.log(f"[OK] '{pkg}' is already installed / Zaten kurulu.")
+                success_count += 1
+                continue
+                
+            # 2. Arch Linux: Pre-check if package is in main repos to avoid scary "target not found" errors
+            if self.pkg_manager == "pacman":
+                if subprocess.call(f"pacman -Si {pkg} > /dev/null 2>&1", shell=True) != 0:
+                    self.log(f"[AUR] '{pkg}' not in main repos, queuing for AUR... / AUR listesine eklendi.")
+                    aur_packages.append(pkg)
+                    continue
+
             self.log(t["s2_dl"].format(pkg))
             cmd = ""
             if self.pkg_manager == "apt": cmd = f"apt-get install -y {pkg}"
-            elif self.pkg_manager == "pacman": cmd = f"pacman -S --noconfirm --needed {pkg}"
+            elif self.pkg_manager == "pacman": cmd = f"pacman -S --noconfirm {pkg}"
             elif self.pkg_manager == "dnf": cmd = f"dnf install -y {pkg}"
                 
             if self.run_cmd(cmd): 
                 success_count += 1
             else: 
-                # Eğer pacman ile kurulamadıysa (resmi depoda yoksa), AUR listesine ekle
-                if self.pkg_manager == "pacman":
-                    self.log(f"[INFO] '{pkg}' added to AUR queue (not in main repos).")
-                    aur_packages.append(pkg)
-                else:
-                    self.log(t["s2_err"].format(pkg))
+                self.log(t["s2_err"].format(pkg))
 
         # Phase 2.5: AUR Batch Installation
         if aur_packages and self.pkg_manager == "pacman":
