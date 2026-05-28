@@ -94,7 +94,7 @@ T = {
         "ok_all": "\n[SUCCESS] Operation Completed. Your station is ready for duty!",
         "cat_info": "Info Gathering", "cat_web": "Web Vulns", "cat_pass": "Password Cracking", 
         "cat_wifi": "Wireless", "cat_exploit": "Exploitation", "cat_sniff": "Sniffing/Spoofing", 
-        "cat_rev": "Reverse Eng.", "cat_for": "Forensics", "cat_mal": "Malware Analysis", "cat_util": "General Utils"
+        "cat_reverse": "Reverse Eng.", "cat_forensics": "Forensics", "cat_malware": "Malware Analysis", "cat_utils": "General Utils"
     },
     "tr": {
         "main_title": "Rezonans CyberOS - Ultimate Kurulum Merkezi",
@@ -122,7 +122,7 @@ T = {
         "ok_all": "\n[BAŞARILI] İşlem Tamamlandı. İstasyonunuz Göreve Hazır!",
         "cat_info": "Bilgi Toplama", "cat_web": "Web Zafiyet", "cat_pass": "Parola Kırma", 
         "cat_wifi": "Kablosuz Ağ", "cat_exploit": "İstismar (Exploit)", "cat_sniff": "Sniffing/Spoofing", 
-        "cat_rev": "Tersine Müh.", "cat_for": "Adli Bilişim", "cat_mal": "Zararlı Yazılım", "cat_util": "Genel Araçlar"
+        "cat_reverse": "Tersine Müh.", "cat_forensics": "Adli Bilişim", "cat_malware": "Zararlı Yazılım", "cat_utils": "Genel Araçlar"
     }
 }
 
