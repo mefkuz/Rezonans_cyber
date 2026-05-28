@@ -44,6 +44,20 @@ sudo python3 cyber_os_gui.py
 ```
 > **Note for Arch/CachyOS users**: The script will automatically bypass the PEP 668 (externally-managed-environment) restriction and install necessary GUI libraries (`tk`, `customtkinter`) safely in the background before launching the application.
 
+### ⚠️ Troubleshooting (Wayland / Segmentation Fault)
+If the GUI crashes immediately with a `Segmentation fault` or display error, it is likely due to Wayland blocking GUI applications from running as root. You have two easy solutions:
+
+**Option A (Recommended):** Preserve your environment variables
+```bash
+sudo -E python3 cyber_os_gui.py
+```
+
+**Option B:** Grant root access to the local display server
+```bash
+xhost +si:localuser:root
+sudo python3 cyber_os_gui.py
+```
+
 ## 🧰 Built-In Tool Categories
 - **Information Gathering**: `nmap`, `masscan`, `recon-ng`, `spiderfoot`...
 - **Web Vulnerability**: `burpsuite`, `zaproxy`, `caido`, `sqlmap`...

@@ -44,6 +44,20 @@ sudo python3 cyber_os_gui.py
 ```
 > **Arch/CachyOS Kullanıcıları İçin Not**: Script, arayüzün açılması için gereken Python kütüphanelerini (PEP 668 engeline takılmadan) arka planda otomatik olarak sizin yerinize kuracaktır.
 
+### ⚠️ Sorun Giderme (Wayland / Segmentation Fault Hatası)
+Eğer arayüzü başlatırken anında `Segmentation fault` hatası alıp çöküyorsa, bu durum Wayland görüntü sunucusunun root (sudo) yetkisiyle grafik arayüz açılmasını engellemesinden kaynaklanır. Çözüm için şu iki yöntemden birini kullanın:
+
+**Yöntem A (Önerilen):** Ortam değişkenlerini koruyarak çalıştırın
+```bash
+sudo -E python3 cyber_os_gui.py
+```
+
+**Yöntem B:** Ekran yetkilerini kök kullanıcıya da atayın
+```bash
+xhost +si:localuser:root
+sudo python3 cyber_os_gui.py
+```
+
 ## 🧰 İçerdiği Başlıca Araç Kategorileri
 - **Bilgi Toplama (Recon)**: `nmap`, `masscan`, `recon-ng`, `spiderfoot`...
 - **Web Zafiyet (Web Pentest)**: `burpsuite`, `zaproxy`, `caido`, `sqlmap`...
