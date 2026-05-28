@@ -48,9 +48,9 @@ ctk.set_default_color_theme("green")
 
 # --- INTERNAL TOOLS DATABASE ---
 TOOLS = {
-    "info": ["nmap", "masscan", "netdiscover", "dnsenum", "dnsrecon", "fierce", "theharvester", "whois", "bind-tools", "amass", "sublist3r", "recon-ng", "spiderfoot", "dmitry", "arp-scan", "p0f", "enum4linux", "smbclient"],
+    "info": ["nmap", "masscan", "netdiscover", "dnsenum", "dnsrecon", "fierce", "theharvester", "whois", "bind-tools", "amass", "sublist3r", "spiderfoot", "dmitry", "arp-scan", "p0f", "enum4linux", "smbclient"],
     "web": ["burpsuite", "zaproxy", "sqlmap", "gobuster", "nikto", "dirb", "dirbuster", "wfuzz", "wpscan", "whatweb", "caido", "skipfish", "uniscan", "wapiti", "commix", "ffuf", "xsser", "xsstrike", "w3af"],
-    "pass": ["hashcat", "john", "hydra", "medusa", "ncrack", "crunch", "cupp", "wordlists", "cewl", "patator", "crowbar", "ophcrack", "fcrackzip", "pdfcrack"],
+    "pass": ["hashcat", "john", "hydra", "medusa", "ncrack", "crunch", "cupp", "wordlists", "cewl", "crowbar", "ophcrack", "fcrackzip", "pdfcrack"],
     "wifi": ["aircrack-ng", "kismet", "reaver", "wifite", "bully", "hcxdumptool", "hcxtools", "cowpatty", "fern-wifi-cracker", "macchanger", "mdk3", "mdk4"],
     "exploit": ["metasploit", "searchsploit", "beef", "routersploit", "social-engineer-toolkit", "sqlmap", "armitage", "exploitdb", "msfpc"],
     "sniff": ["wireshark-cli", "tcpdump", "bettercap", "ettercap", "responder", "macchanger", "mitmproxy", "dsniff", "netsniff-ng", "sslstrip", "scapy", "arpspoof"],
