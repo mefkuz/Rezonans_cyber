@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -6,6 +6,11 @@ import sys
 import subprocess
 import threading
 import shutil
+
+# --- Force System Python (bypass Linuxbrew/Homebrew Python which lacks _tkinter) ---
+SYSTEM_PYTHON = "/usr/bin/python3"
+if os.path.exists(SYSTEM_PYTHON) and sys.executable != SYSTEM_PYTHON:
+    os.execvp(SYSTEM_PYTHON, [SYSTEM_PYTHON] + sys.argv)
 
 
 
@@ -34,7 +39,7 @@ try:
     import customtkinter as ctk
 except ImportError:
     print("Installing customtkinter... / CustomTkinter kuruluyor...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "customtkinter", "--break-system-packages"])
+    subprocess.check_call([SYSTEM_PYTHON, "-m", "pip", "install", "customtkinter", "--break-system-packages"])
     import customtkinter as ctk
 
 ctk.set_appearance_mode("Dark")
