@@ -3,11 +3,11 @@
 [![Lisans: MIT](https://img.shields.io/badge/Lisans-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Linux-blue.svg)]()
 [![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)]()
-[![Araçlar](https://img.shields.io/badge/G%C3%BCvenlik%20Ara%C3%A7lar%C4%B1-120+-red.svg)]()
+[![Araçlar](https://img.shields.io/badge/G%C3%BCvenlik%20Ara%C3%A7lar%C4%B1-155+-red.svg)]()
 
 > 🇬🇧 [Click for English version](README.md)
 
-**Rezonans CyberOS**, herhangi bir Linux dağıtımını profesyonel bir siber güvenlik istasyonuna dönüştüren, sıfır bağımlılıklı terminal tabanlı kurulum aracıdır. Paket yöneticinizi otomatik algılar, 120+ güvenlik aracını kurar ve kernel düzeyinde sistem sıkılaştırması uygular — tamamı şık bir CLI arayüzünden.
+**Rezonans CyberOS**, herhangi bir Linux dağıtımını profesyonel bir siber güvenlik istasyonuna dönüştüren, sıfır bağımlılıklı terminal tabanlı kurulum aracıdır. Paket yöneticinizi otomatik algılar, 155+ güvenlik aracını kurar ve kernel düzeyinde sistem sıkılaştırması uygular — tamamı şık bir CLI arayüzünden.
 
 ---
 
@@ -17,7 +17,7 @@
 |---|---|
 | 🎯 **Sıfır Bağımlılık** | GUI kütüphanesi yok, pip paketi yok — saf Python standart kütüphanesi |
 | 🐧 **Evrensel Linux** | `apt`, `pacman`, `dnf` otomatik algılama — Arch, Ubuntu, Fedora, CachyOS vb. |
-| 📦 **120+ Güvenlik Aracı** | Saldırı ve savunma güvenlik yelpazesini kapsayan 10 kategori |
+| 📦 **155+ Güvenlik Aracı** | Saldırı ve savunma güvenlik yelpazesini kapsayan 10 kategori |
 | 🚀 **Akıllı AUR Desteği** | Arch tabanlı sistemlerde `paru`/`yay` ile AUR paketlerini doğrulayıp toplu kurar |
 | 🔒 **Kernel Sıkılaştırma** | sysctl tabanlı ağ güvenliği (SYN flood, ICMP, IPv6, kaynak yönlendirme) |
 | 🌍 **İngilizce & Türkçe** | Başlangıçta dil seçimi ile tam i18n desteği |

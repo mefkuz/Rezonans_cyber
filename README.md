@@ -3,11 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Linux-blue.svg)]()
 [![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)]()
-[![Tools](https://img.shields.io/badge/Security%20Tools-120+-red.svg)]()
+[![Tools](https://img.shields.io/badge/Security%20Tools-155+-red.svg)]()
 
 > 🇹🇷 [Türkçe sürüm için tıklayın / Click for Turkish version](README_TR.md)
 
-**Rezonans CyberOS** is a zero-dependency, terminal-based installer that transforms any Linux distribution into a professional cybersecurity workstation. It automatically detects your package manager, installs 120+ security tools, and applies kernel-level system hardening — all from a beautiful CLI interface.
+**Rezonans CyberOS** is a zero-dependency, terminal-based installer that transforms any Linux distribution into a professional cybersecurity workstation. It automatically detects your package manager, installs 155+ security tools, and applies kernel-level system hardening — all from a beautiful CLI interface.
 
 ---
 
