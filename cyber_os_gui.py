@@ -141,7 +141,8 @@ class CyberOSInstaller(ctk.CTk):
         self.resizable(False, False)
 
     def detect_pkg_manager(self):
-        for mgr in ["apt-get", "pacman", "dnf", "yum"]:
+        # Arch/CachyOS'te AUR paketleri (dirb vb.) için önce paru veya yay aranır
+        for mgr in ["paru", "yay", "apt-get", "pacman", "dnf", "yum"]:
             if shutil.which(mgr): return "apt" if mgr == "apt-get" else mgr
         return None
 
@@ -304,8 +305,11 @@ class CyberOSInstaller(ctk.CTk):
         
         # Phase 1
         self.log(t["s1"])
+        real_user = os.environ.get("SUDO_USER", "root")
+        
         if self.pkg_manager == "apt": self.run_cmd("apt-get update -y")
         elif self.pkg_manager == "pacman": self.run_cmd("pacman -Sy --noconfirm")
+        elif self.pkg_manager in ["paru", "yay"]: self.run_cmd(f"sudo -u {real_user} {self.pkg_manager} -Sy")
         elif self.pkg_manager == "dnf": self.run_cmd("dnf check-update")
             
         # Phase 2
@@ -316,6 +320,7 @@ class CyberOSInstaller(ctk.CTk):
             cmd = ""
             if self.pkg_manager == "apt": cmd = f"apt-get install -y {pkg}"
             elif self.pkg_manager == "pacman": cmd = f"pacman -S --noconfirm --needed {pkg}"
+            elif self.pkg_manager in ["paru", "yay"]: cmd = f"sudo -u {real_user} {self.pkg_manager} -S --noconfirm --needed {pkg}"
             elif self.pkg_manager == "dnf": cmd = f"dnf install -y {pkg}"
                 
             if self.run_cmd(cmd): success_count += 1
