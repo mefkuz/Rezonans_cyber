@@ -62,7 +62,7 @@ TOOLS = {
 
 PACKAGE_MAPPING = {
     "apt": {"wireshark-cli": "tshark", "bind-tools": "dnsutils", "metasploit": "metasploit-framework", "netcat": "netcat-traditional", "wordlists": "wordlists"},
-    "pacman": {"wireshark-cli": "wireshark-cli", "bind-tools": "bind", "metasploit": "metasploit", "netcat": "gnu-netcat", "wordlists": "seclists", "burpsuite": "burpsuite", "zaproxy": "zaproxy", "amass": "amass-bin", "caido": "caido-bin", "ffuf": "ffuf-bin", "gobuster": "gobuster-bin"},
+    "pacman": {"wireshark-cli": "wireshark-cli", "bind-tools": "bind", "metasploit": "metasploit", "netcat": "gnu-netcat", "wordlists": "seclists", "burpsuite": "burpsuite", "zaproxy": "zaproxy", "amass": "amass-bin", "caido": "caido-bin", "ffuf": "ffuf-bin"},
     "dnf": {"wireshark-cli": "wireshark", "bind-tools": "bind-utils", "netcat": "nc"}
 }
 
@@ -331,8 +331,13 @@ class CyberOSInstaller(ctk.CTk):
             # 2. Arch Linux: Pre-check if package is in main repos to avoid scary "target not found" errors
             if self.pkg_manager == "pacman":
                 if subprocess.call(f"pacman -Si {pkg} > /dev/null 2>&1", shell=True) != 0:
-                    self.log(f"[AUR] '{pkg}' not in main repos, queuing for AUR... / AUR listesine eklendi.")
-                    aur_packages.append(pkg)
+                    # AUR'da var mı diye kontrol et (toplu kurulumun çökmesini engellemek için)
+                    aur_helper = "paru" if shutil.which("paru") else ("yay" if shutil.which("yay") else None)
+                    if aur_helper and subprocess.call(f"sudo -u {real_user} {aur_helper} -Sqa {pkg} > /dev/null 2>&1", shell=True) == 0:
+                        self.log(f"[AUR] '{pkg}' queued for AUR... / AUR listesine eklendi.")
+                        aur_packages.append(pkg)
+                    else:
+                        self.log(f"[SKIP] '{pkg}' not found in Main/AUR. Skipping... / Bulunamadı, atlanıyor.")
                     continue
 
             self.log(t["s2_dl"].format(pkg))
