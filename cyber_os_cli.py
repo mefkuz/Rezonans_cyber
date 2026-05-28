@@ -53,16 +53,16 @@ BANNER = f"""
 # TOOLS DATABASE
 # ═══════════════════════════════════════════════════════════
 TOOLS = {
-    "info":      ["nmap", "masscan", "netdiscover", "dnsenum", "dnsrecon", "fierce", "theharvester", "whois", "bind-tools", "amass", "sublist3r", "spiderfoot", "dmitry", "arp-scan", "p0f", "enum4linux", "smbclient"],
-    "web":       ["burpsuite", "zaproxy", "sqlmap", "gobuster", "nikto", "dirb", "dirbuster", "wfuzz", "wpscan", "whatweb", "caido", "skipfish", "uniscan", "wapiti", "commix", "ffuf", "xsser", "xsstrike", "w3af"],
+    "info":      ["nmap", "masscan", "netdiscover", "dnsenum", "dnsrecon", "fierce", "theharvester", "whois", "bind-tools", "amass", "sublist3r", "spiderfoot", "dmitry", "arp-scan", "p0f", "enum4linux", "smbclient", "subfinder", "assetfinder", "dnsx", "naabu"],
+    "web":       ["burpsuite", "zaproxy", "sqlmap", "gobuster", "nikto", "dirb", "dirbuster", "wfuzz", "wpscan", "whatweb", "caido", "skipfish", "uniscan", "wapiti", "commix", "ffuf", "xsser", "xsstrike", "w3af", "nuclei", "httpx", "katana", "feroxbuster", "dalfox", "arjun"],
     "pass":      ["hashcat", "john", "hydra", "medusa", "ncrack", "crunch", "cupp", "wordlists", "cewl", "crowbar", "ophcrack", "fcrackzip", "pdfcrack"],
-    "wifi":      ["aircrack-ng", "kismet", "reaver", "wifite", "bully", "hcxdumptool", "hcxtools", "cowpatty", "fern-wifi-cracker", "macchanger", "mdk3", "mdk4"],
-    "exploit":   ["metasploit", "searchsploit", "beef", "routersploit", "social-engineer-toolkit", "sqlmap", "armitage", "exploitdb", "msfpc"],
+    "wifi":      ["aircrack-ng", "kismet", "reaver", "wifite", "bully", "hcxdumptool", "hcxtools", "cowpatty", "fern-wifi-cracker", "macchanger", "mdk3", "mdk4", "airgeddon", "wifiphisher", "fluxion"],
+    "exploit":   ["metasploit", "searchsploit", "beef", "routersploit", "social-engineer-toolkit", "sqlmap", "armitage", "exploitdb", "msfpc", "netexec", "evil-winrm", "bloodhound", "peass-ng"],
     "sniff":     ["wireshark-cli", "tcpdump", "bettercap", "ettercap", "responder", "macchanger", "mitmproxy", "dsniff", "netsniff-ng", "sslstrip", "scapy", "arpspoof"],
-    "reverse":   ["radare2", "ghidra", "apktool", "ltrace", "strace", "gdb", "binwalk", "dex2jar", "jd-cli", "edb-debugger", "jadx", "objdump"],
+    "reverse":   ["radare2", "ghidra", "apktool", "ltrace", "strace", "gdb", "binwalk", "dex2jar", "jd-cli", "edb-debugger", "jadx", "objdump", "imhex", "cutter", "frida-tools", "upx"],
     "forensics": ["autopsy", "sleuthkit", "volatility3", "foremost", "scalpel", "exiftool", "chkrootkit", "rkhunter", "ddrescue", "guymager", "bulk_extractor"],
-    "malware":   ["yara", "clamav", "maldet", "cuckoo-sandbox"],
-    "utils":     ["tmux", "git", "curl", "wget", "htop", "neovim", "netcat", "proxychains", "tor", "openvpn", "docker", "wireguard-tools", "zsh", "steghide"]
+    "malware":   ["yara", "clamav", "maldet", "cuckoo-sandbox", "capa", "floss"],
+    "utils":     ["tmux", "git", "curl", "wget", "htop", "neovim", "netcat", "proxychains", "tor", "openvpn", "docker", "wireguard-tools", "zsh", "steghide", "chisel", "ligolo-ng", "rustscan", "eza", "ripgrep", "fd", "bat", "fzf", "tldr"]
 }
 
 CAT_NAMES = {
@@ -76,7 +76,7 @@ CAT_NAMES = {
 
 PACKAGE_MAPPING = {
     "apt":    {"wireshark-cli": "tshark", "bind-tools": "dnsutils", "metasploit": "metasploit-framework", "netcat": "netcat-traditional", "wordlists": "wordlists"},
-    "pacman": {"wireshark-cli": "wireshark-cli", "bind-tools": "bind", "metasploit": "metasploit", "netcat": "gnu-netcat", "wordlists": "seclists", "burpsuite": "burpsuite", "zaproxy": "zaproxy", "amass": "amass-bin", "caido": "caido-bin"},
+    "pacman": {"wireshark-cli": "wireshark-cli", "bind-tools": "bind", "metasploit": "metasploit", "netcat": "gnu-netcat", "wordlists": "seclists", "burpsuite": "burpsuite", "zaproxy": "zaproxy", "amass": "amass-bin", "caido": "caido-bin", "subfinder": "subfinder-bin", "assetfinder": "assetfinder-bin", "dnsx": "dnsx-bin", "naabu": "naabu-bin", "nuclei": "nuclei-bin", "httpx": "httpx-bin", "katana": "katana-bin", "feroxbuster": "feroxbuster-bin", "dalfox": "dalfox-bin", "netexec": "netexec-bin", "imhex": "imhex-bin", "chisel": "chisel-bin", "ligolo-ng": "ligolo-ng-bin", "rustscan": "rustscan-bin", "capa": "capa-bin", "floss": "floss-bin"},
     "dnf":    {"wireshark-cli": "wireshark", "bind-tools": "bind-utils", "netcat": "nc"}
 }
 
