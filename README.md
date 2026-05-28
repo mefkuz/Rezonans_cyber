@@ -127,9 +127,3 @@ cyber_os_cli.py          ← Single-file, zero-dependency CLI installer
 
 This project is licensed under the **MIT License**.
 
----
-
-<p align="center">
-  <b>Built with 💚 by the Rezonans Team</b><br>
-  <i>Transform any Linux into a cyber weapon.</i>
-</p>
