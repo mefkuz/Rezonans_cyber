@@ -141,8 +141,7 @@ class CyberOSInstaller(ctk.CTk):
         self.resizable(False, False)
 
     def detect_pkg_manager(self):
-        # Arch/CachyOS'te AUR paketleri (dirb vb.) için önce paru veya yay aranır
-        for mgr in ["paru", "yay", "apt-get", "pacman", "dnf", "yum"]:
+        for mgr in ["apt-get", "pacman", "dnf", "yum"]:
             if shutil.which(mgr): return "apt" if mgr == "apt-get" else mgr
         return None
 
@@ -309,22 +308,42 @@ class CyberOSInstaller(ctk.CTk):
         
         if self.pkg_manager == "apt": self.run_cmd("apt-get update -y")
         elif self.pkg_manager == "pacman": self.run_cmd("pacman -Sy --noconfirm")
-        elif self.pkg_manager in ["paru", "yay"]: self.run_cmd(f"sudo -u {real_user} {self.pkg_manager} -Sy")
         elif self.pkg_manager == "dnf": self.run_cmd("dnf check-update")
             
         # Phase 2
         self.log(t["s2"])
         success_count = 0
+        aur_packages = []
+        
         for pkg in selected_packages:
             self.log(t["s2_dl"].format(pkg))
             cmd = ""
             if self.pkg_manager == "apt": cmd = f"apt-get install -y {pkg}"
             elif self.pkg_manager == "pacman": cmd = f"pacman -S --noconfirm --needed {pkg}"
-            elif self.pkg_manager in ["paru", "yay"]: cmd = f"sudo -u {real_user} {self.pkg_manager} -S --noconfirm --needed {pkg}"
             elif self.pkg_manager == "dnf": cmd = f"dnf install -y {pkg}"
                 
-            if self.run_cmd(cmd): success_count += 1
-            else: self.log(t["s2_err"].format(pkg))
+            if self.run_cmd(cmd): 
+                success_count += 1
+            else: 
+                # Eğer pacman ile kurulamadıysa (resmi depoda yoksa), AUR listesine ekle
+                if self.pkg_manager == "pacman":
+                    self.log(f"[INFO] '{pkg}' added to AUR queue (not in main repos).")
+                    aur_packages.append(pkg)
+                else:
+                    self.log(t["s2_err"].format(pkg))
+
+        # Phase 2.5: AUR Batch Installation
+        if aur_packages and self.pkg_manager == "pacman":
+            aur_helper = "paru" if shutil.which("paru") else ("yay" if shutil.which("yay") else None)
+            if aur_helper:
+                self.log(f"\n[INFO] Installing {len(aur_packages)} packages from AUR via {aur_helper}...")
+                aur_cmd = f"sudo -u {real_user} {aur_helper} -S --noconfirm --needed {' '.join(aur_packages)}"
+                if self.run_cmd(aur_cmd):
+                    success_count += len(aur_packages)
+                else:
+                    self.log("[WARNING] AUR installation finished with some errors.")
+            else:
+                self.log(f"[WARNING] Missing paru/yay. Could not install: {aur_packages}")
 
         self.log(t["s2_sum"].format(success_count, len(selected_packages)))
 
