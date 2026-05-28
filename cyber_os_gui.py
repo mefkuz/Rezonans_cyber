@@ -230,6 +230,10 @@ class CyberOSInstaller(ctk.CTk):
         self.log_textbox.insert("0.0", T[self.lang]["term_init"])
         self.log_textbox.configure(state="disabled")
 
+        self.progressbar = ctk.CTkProgressBar(log_frame, progress_color="#00FF41", height=15)
+        self.progressbar.pack(fill="x", padx=10, pady=(0, 10))
+        self.progressbar.set(0)
+
         # 4. BOTTOM AREA (Hardening & Install)
         bottom_frame = ctk.CTkFrame(self)
         bottom_frame.pack(pady=15, padx=20, fill="x")
@@ -291,6 +295,7 @@ class CyberOSInstaller(ctk.CTk):
 
     def install_process(self):
         t = T[self.lang]
+        self.progressbar.set(0)
         self.log(t["log_start"])
         
         selected_packages = []
@@ -306,6 +311,13 @@ class CyberOSInstaller(ctk.CTk):
             self.profile_segmented.configure(state="normal")
             return
 
+        total_steps = len(selected_packages) + 3 # Phase 1, Phase 2.5, Phase 3
+        current_step = 0
+        def update_progress():
+            nonlocal current_step
+            current_step += 1
+            self.progressbar.set(current_step / total_steps)
+
         self.log(t["inf_tot"].format(len(selected_packages)))
         
         # Phase 1
@@ -315,6 +327,7 @@ class CyberOSInstaller(ctk.CTk):
         if self.pkg_manager == "apt": self.run_cmd("apt-get update -y")
         elif self.pkg_manager == "pacman": self.run_cmd("pacman -Sy --noconfirm")
         elif self.pkg_manager == "dnf": self.run_cmd("dnf check-update")
+        update_progress()
             
         # Phase 2
         self.log(t["s2"])
@@ -350,6 +363,7 @@ class CyberOSInstaller(ctk.CTk):
                 success_count += 1
             else: 
                 self.log(t["s2_err"].format(pkg))
+            update_progress()
 
         # Phase 2.5: AUR Batch Installation
         if aur_packages and self.pkg_manager == "pacman":
@@ -363,6 +377,7 @@ class CyberOSInstaller(ctk.CTk):
                     self.log("[WARNING] AUR installation finished with some errors.")
             else:
                 self.log(f"[WARNING] Missing paru/yay. Could not install: {aur_packages}")
+        update_progress()
 
         self.log(t["s2_sum"].format(success_count, len(selected_packages)))
 
@@ -373,6 +388,7 @@ class CyberOSInstaller(ctk.CTk):
             self.run_cmd(f"echo -e '{sysctl}' > /etc/sysctl.d/99-cybersecurity.conf")
             self.run_cmd("sysctl -p /etc/sysctl.d/99-cybersecurity.conf")
             self.log(t["s3_ok"])
+        update_progress()
 
         self.log(t["ok_all"])
         self.install_btn.configure(state="normal", text=t["btn_done"])
