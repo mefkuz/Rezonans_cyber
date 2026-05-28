@@ -83,17 +83,25 @@ PACKAGE_MAPPING = {
 PROFILES = {
     "en": {
         "1": ("Full Arsenal (ALL Tools)", list(TOOLS.keys())),
-        "2": ("Web Pentester", ["info", "web", "pass", "utils"]),
-        "3": ("Network Specialist", ["info", "wifi", "sniff", "utils", "reverse"]),
-        "4": ("Forensics & Malware Analyst", ["forensics", "malware", "reverse", "utils"]),
-        "5": ("Custom Selection (choose categories)", None),
+        "2": ("Red Teamer / Exploit Expert", ["info", "exploit", "pass", "sniff", "utils"]),
+        "3": ("Web Application Pentester", ["info", "web", "pass", "utils"]),
+        "4": ("Network Specialist & WiFi Auditor", ["info", "wifi", "sniff", "utils"]),
+        "5": ("Reverse Engineer & Binary Analyst", ["reverse", "exploit", "utils"]),
+        "6": ("Digital Forensics & Incident Response (DFIR)", ["forensics", "malware", "reverse", "utils"]),
+        "7": ("OSINT & Recon Specialist", ["info", "web"]),
+        "8": ("Minimalist Pentester (Crucial Tools)", ["info", "exploit", "utils"]),
+        "9": ("Custom Selection (choose categories)", None),
     },
     "tr": {
         "1": ("Full Arsenal (TÜM Araçlar)", list(TOOLS.keys())),
-        "2": ("Web Pentester", ["info", "web", "pass", "utils"]),
-        "3": ("Ağ Uzmanı", ["info", "wifi", "sniff", "utils", "reverse"]),
-        "4": ("Adli Bilişim & Zararlı Analiz", ["forensics", "malware", "reverse", "utils"]),
-        "5": ("Özel Seçim (kategorileri seç)", None),
+        "2": ("Red Teamer / Sızma Testi Uzmanı", ["info", "exploit", "pass", "sniff", "utils"]),
+        "3": ("Web Uygulamaları Pentester", ["info", "web", "pass", "utils"]),
+        "4": ("Ağ Güvenliği ve Kablosuz Ağ Uzmanı", ["info", "wifi", "sniff", "utils"]),
+        "5": ("Tersine Mühendislik & İkili Analiz", ["reverse", "exploit", "utils"]),
+        "6": ("Adli Bilişim & Olay Müdahale (DFIR)", ["forensics", "malware", "reverse", "utils"]),
+        "7": ("OSINT & Keşif Uzmanı", ["info", "web"]),
+        "8": ("Minimalist Pentester (Kritik Araçlar)", ["info", "exploit", "utils"]),
+        "9": ("Özel Seçim (kategorileri seç)", None),
     }
 }
 
@@ -265,7 +273,7 @@ class RezonansInstaller:
             print(f"  {C.NEON}{C.BOLD}{num}{C.RESET} {C.GRAY}│{C.RESET} {name}")
         line()
 
-        choice = ask(f"[1-5]:", "1")
+        choice = ask(f"[1-{len(profiles)}]:", "1")
         if choice not in profiles:
             choice = "1"
 
